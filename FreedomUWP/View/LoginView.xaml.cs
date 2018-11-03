@@ -1,4 +1,4 @@
-﻿using FreedomUWP.View;
+﻿using FreedomUWP.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,32 +16,21 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace FreedomUWP
+namespace FreedomUWP.View
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Shell : Page
+    public sealed partial class LoginView : Page
     {
-        static event EventHandler<string[]> AuthViewRequested;
-        public Shell()
+        public LoginView()
         {
             this.InitializeComponent();
-            AuthViewFrame.Visibility = Visibility.Collapsed;
-            ContentFrame.Navigate(typeof(LoginView));
         }
 
-
-        
-
-        internal void AddAuthView(AuthView authView)
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            AuthViewFrame.Visibility = Visibility.Visible;
-            AuthViewFrame.Content = authView;
-        }
-
-        internal static void RequestAuthViewClose()
-        {
+            await OAuth.Authenticate();
         }
     }
 }
