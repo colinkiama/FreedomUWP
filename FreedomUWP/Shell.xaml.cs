@@ -23,7 +23,6 @@ namespace FreedomUWP
     /// </summary>
     public sealed partial class Shell : Page
     {
-        static event EventHandler<string[]> AuthViewRequested;
         public Shell()
         {
             this.InitializeComponent();
@@ -31,17 +30,5 @@ namespace FreedomUWP
             ContentFrame.Navigate(typeof(LoginView));
         }
 
-
-        
-
-        internal void AddAuthView(AuthView authView)
-        {
-            AuthViewFrame.Visibility = Visibility.Visible;
-            AuthViewFrame.Content = authView;
-        }
-
-        internal static void RequestAuthViewClose()
-        {
-        }
     }
 }

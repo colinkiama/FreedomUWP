@@ -1,5 +1,4 @@
-﻿using FreedomUWP.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,20 +20,11 @@ namespace FreedomUWP.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class LoginView : Page
+    public sealed partial class CreatePostView : Page
     {
-        public LoginView()
+        public CreatePostView()
         {
             this.InitializeComponent();
-        }
-
-        private async void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            bool authenticationResult = await OAuth.Authenticate();
-            if (authenticationResult == true)
-            {
-                Frame.Navigate(typeof(HomeView));
-            }
         }
     }
 }

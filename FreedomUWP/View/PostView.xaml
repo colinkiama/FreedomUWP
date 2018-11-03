@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="FreedomUWP.View.AuthView"
+    x:Class="FreedomUWP.View.PostView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:FreedomUWP.View"
@@ -9,13 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="32"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Button Name="CloseButton" Content="Cancel"
-                Click="CloseButton_Click"/>
-        <WebView Name="mainWebView" Margin="20"
-                 Grid.Row="1"/>
+
     </Grid>
 </Page>

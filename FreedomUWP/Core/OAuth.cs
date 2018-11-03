@@ -14,8 +14,9 @@ namespace FreedomUWP.Core
 {
     public static class OAuth
     {
-        public async static Task Authenticate()
+        public async static Task<bool> Authenticate()
         {
+            bool hasAuthenticated = false;
 
             const string _authCodeString = "code";
 
@@ -56,14 +57,16 @@ namespace FreedomUWP.Core
 
                 // When your access token expires, use the refresh token to get a new one.
                 var newAccessToken = oAuthClient.GetAccessToken(accessToken.RefreshToken);
+
+                hasAuthenticated = true;
             }
             catch (Exception)
             {
 
-                throw;
+                
             }
 
-
+            return hasAuthenticated;
 
         }
 
@@ -107,13 +110,6 @@ namespace FreedomUWP.Core
                 // Authentication failed. Handle parameter, SSL/TLS, and Network Unavailable errors here. 
                 result = ex.Message;
             }
-
-
-            //AuthView authView = new AuthView();
-            //Frame currentFrame = (Frame)Window.Current.Content;
-            //Shell thisShell = (Shell)currentFrame.Content;
-            //thisShell.AddAuthView(authView);
-            //result = authView.Authenticate(startURL, endURL);
 
             return result;
         }
