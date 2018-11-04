@@ -7,4 +7,8 @@ Feel free to explore the code. 😊
 
 ![Screenshot of app where user is creating a post](img/FreedomShot.png)
 
-Readme will be updated in time.
+## Checklist
+
+### Features to add before store release:
+- [ ] Publish article to personal medium
+- [ ] Ability to sign out of app after signing in.
