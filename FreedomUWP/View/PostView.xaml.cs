@@ -63,7 +63,7 @@ namespace FreedomUWP.View
             string richEditBoxContent = "";
             reb.Document.GetText(Windows.UI.Text.TextGetOptions.None, out richEditBoxContent);
             PublishArticleButton.CommandParameter = richEditBoxContent;
-            Debug.WriteLine("Dab");
+            Debug.WriteLine("Dabb");
         }
     }
 }
