@@ -23,7 +23,9 @@
                     Margin="40,40,0,0">
             <TextBlock Text="{x:Bind ViewModel.Title, Mode=OneWay}"
                    FontWeight="Bold"
-                   FontSize="20"/>
+                   FontSize="20"
+                       MaxWidth="300"
+                       TextTrimming="CharacterEllipsis"/>
             <Button Name="EditTitleButton"
                     Style="{StaticResource TextBlockButtonStyle}"
                     Foreground="Black"
@@ -36,10 +38,13 @@
             </Button>
         </StackPanel>
         <TextBox Name="EditTitleTextBox"
+                 Style="{ThemeResource ComboBoxTextBoxStyle}"
                  Width="200"
                  Height="40"
                  Margin="40,40,0,0"
                  KeyUp="EditTitleTextBox_KeyUp"
+                 HorizontalAlignment="Left"
+                 Visibility="Collapsed"
                  Text="{x:Bind ViewModel.Title, Mode=TwoWay}"/>
         <PersonPicture HorizontalAlignment="Right"
                        Margin="0,28,40,0"
