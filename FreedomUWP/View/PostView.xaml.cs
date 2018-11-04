@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -62,6 +63,7 @@ namespace FreedomUWP.View
             string richEditBoxContent = "";
             reb.Document.GetText(Windows.UI.Text.TextGetOptions.None, out richEditBoxContent);
             PublishArticleButton.CommandParameter = richEditBoxContent;
+            Debug.WriteLine("Dab");
         }
     }
 }
