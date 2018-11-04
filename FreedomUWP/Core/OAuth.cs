@@ -1,4 +1,6 @@
-﻿using FreedomUWP.View;
+﻿using FreedomUWP.Helpers;
+using FreedomUWP.View;
+using Medium.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -12,16 +14,16 @@ using Windows.UI.Xaml.Controls;
 
 namespace FreedomUWP.Core
 {
-    public static class OAuth
+    public class OAuth
     {
+        static Medium.OAuthClient oAuthClient = new Medium.OAuthClient(Constants._clientID, Constants._clientSecret);
+
         public async static Task<bool> Authenticate()
         {
             bool hasAuthenticated = false;
 
             const string _authCodeString = "code";
 
-            // Contact developers@medium.com to get your client ID and client secret.
-            var oAuthClient = new Medium.OAuthClient(Constants._clientID, Constants._clientSecret);
 
             // Build the URL where you can send the user to obtain an authorization code.
             var url = oAuthClient.GetAuthorizeUrl(
@@ -54,11 +56,9 @@ namespace FreedomUWP.Core
 
 
                 var accessToken = oAuthClient.GetAccessToken(authCode, Constants.callbackURL);
-
-                // When your access token expires, use the refresh token to get a new one.
-                var newAccessToken = oAuthClient.GetAccessToken(accessToken.RefreshToken);
-
+                TokenHelper.SaveTokenData(accessToken);
                 hasAuthenticated = true;
+
             }
             catch (Exception)
             {
@@ -112,6 +112,13 @@ namespace FreedomUWP.Core
             }
 
             return result;
+        }
+
+        public static Token RefreshAccessToken(string refreshToken)
+        {
+            // When your access token expires, use the refresh token to get a new one.
+            var newAccessToken = oAuthClient.GetAccessToken(refreshToken);
+            return newAccessToken;
         }
     }
 }

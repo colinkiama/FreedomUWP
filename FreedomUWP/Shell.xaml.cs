@@ -1,4 +1,5 @@
-﻿using FreedomUWP.View;
+﻿using FreedomUWP.Helpers;
+using FreedomUWP.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,7 +28,14 @@ namespace FreedomUWP
         {
             this.InitializeComponent();
             AuthViewFrame.Visibility = Visibility.Collapsed;
-            ContentFrame.Navigate(typeof(LoginView));
+            if (TokenHelper.InitiateTokenSystem() == true)
+            {
+                ContentFrame.Navigate(typeof(HomeView));
+            }
+            else
+            {
+                ContentFrame.Navigate(typeof(LoginView));
+            }
         }
 
     }
