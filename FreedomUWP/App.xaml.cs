@@ -1,12 +1,16 @@
-﻿using System;
+﻿using Medium;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,6 +26,9 @@ namespace FreedomUWP
     /// </summary>
     sealed partial class App : Application
     {
+        public static Client mediumClient = new Client();
+
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -39,6 +46,7 @@ namespace FreedomUWP
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            PrepareWindow();
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
@@ -71,6 +79,30 @@ namespace FreedomUWP
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+        }
+
+        private void PrepareWindow()
+        {
+
+            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+
+            // Default 
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonForegroundColor = Colors.Black;
+
+            // Hover
+            titleBar.ButtonHoverForegroundColor = Colors.Black;
+            titleBar.ButtonHoverBackgroundColor = Colors.WhiteSmoke;
+
+            // Button Press
+            titleBar.ButtonPressedForegroundColor = Colors.Black;
+            titleBar.ButtonPressedBackgroundColor = Colors.White;
+
+            // Inactive
+            titleBar.ButtonInactiveForegroundColor = Colors.Gray;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+
+            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
         }
 
         /// <summary>

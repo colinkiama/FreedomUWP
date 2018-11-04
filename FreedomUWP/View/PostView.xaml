@@ -5,10 +5,74 @@
     xmlns:local="using:FreedomUWP.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:FreedomUWP.ViewModel"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    Background="Transparent">
+    <Page.DataContext>
+        <vm:PostViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <StackPanel Orientation="Horizontal"
+                    Name="TitleStackPanel"
+                    Margin="40,40,0,0">
+            <TextBlock Text="{x:Bind ViewModel.Title, Mode=OneWay}"
+                   FontWeight="Bold"
+                   FontSize="20"/>
+            <Button Name="EditTitleButton"
+                    Style="{StaticResource TextBlockButtonStyle}"
+                    Foreground="Black"
+                    VerticalAlignment="Top"
+                    Click="EditTitleButton_Click">
+                <Button.Content>
+                    <FontIcon FontSize="20"
+                        FontFamily="Segoe MDL2 Assets" Glyph="&#xE104;" />
+                </Button.Content>
+            </Button>
+        </StackPanel>
+        <TextBox Name="EditTitleTextBox"
+                 Width="200"
+                 Height="40"
+                 Margin="40,40,0,0"
+                 KeyUp="EditTitleTextBox_KeyUp"
+                 Text="{x:Bind ViewModel.Title, Mode=TwoWay}"/>
+        <PersonPicture HorizontalAlignment="Right"
+                       Margin="0,28,40,0"
+                       ProfilePicture="{x:Bind ViewModel.CurrentUser.ImageUrl}"
+                       Width="50"
+                       Height="50"/>
+
+        <controls:DropShadowPanel HorizontalContentAlignment="Stretch"
+                                  VerticalContentAlignment="Stretch"
+                                  HorizontalAlignment="Stretch"
+                                  
+                                  Grid.Row="1"
+                                  Margin="60,40,60,0"
+                                  BlurRadius="20"
+                                  Color="Gray">
+            <RichEditBox ScrollViewer.IsHorizontalRailEnabled="True"
+                         Background="White"
+                         BorderThickness="0"
+                         Padding="32,40,32,20   "/>
+        </controls:DropShadowPanel>
+
+        <Button Grid.Row="1" Style="{StaticResource TextBlockButtonStyle}"
+                Background="Transparent"
+                Foreground="Black"
+                ToolTipService.ToolTip="Publish"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right">
+            <Button.Content>
+                <FontIcon FontSize="24" 
+                    FontFamily="Segoe MDL2 Assets"
+                          Glyph="&#xE122;" 
+                          Margin="0,0,8,8"/>
+            </Button.Content>
+        </Button>
     </Grid>
 </Page>

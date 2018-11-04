@@ -2,6 +2,7 @@
 using Medium.Authentication;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,8 +56,31 @@ namespace FreedomUWP.Helpers
 
         public static void SaveTokenData(Token accessTokenData)
         {
-            SaveExpiryDate(accessTokenData.ExpiresAt.ToUniversalTime());
-            SaveTokens(accessTokenData);
+            localSettings.Values[Constants.accessTokenKey] = accessTokenData.AccessToken;
+            localSettings.Values[Constants.refreshTokenKey] = accessTokenData.RefreshToken;
+
+            localSettings.Values[Constants.refreshDateKey] = new DateTimeOffset(accessTokenData.ExpiresAt);
+            localSettings.Values[Constants.TokenTypeKey] = accessTokenData.TokenType;
+
+            localSettings.Values[Constants.ScopeKey] = CreateScopeString(accessTokenData.Scope);
+
+        }
+
+        private static string CreateScopeString(Scope[] scope)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < scope.Length; i++)
+            {
+                sb.Append((int)scope[i]);
+                if (i != scope.Length - 1)
+                {
+                    sb.Append(',');
+                }
+            }
+
+            Debug.WriteLine("Scope: " + sb.ToString());
+            return sb.ToString();
+
         }
 
         private static void SaveExpiryDate(DateTimeOffset expiryDate)
@@ -70,6 +94,38 @@ namespace FreedomUWP.Helpers
             localSettings.Values[Constants.refreshTokenKey] = refreshedAccessToken.RefreshToken;
         }
 
+        public static Token GetToken()
+        {
+            string accessToken = (string)localSettings.Values[Constants.accessTokenKey];
+            string refreshToken = (string)localSettings.Values[Constants.refreshTokenKey];
+            DateTime expiryDate = ((DateTimeOffset)localSettings.Values[Constants.refreshDateKey]).DateTime;
+            string tokenType = (string)localSettings.Values[Constants.TokenTypeKey];
+            Scope[] scope = GetScopeFromSettings();
 
+            Token token = new Token()
+            {
+                AccessToken = accessToken,
+                RefreshToken = refreshToken,
+                ExpiresAt = expiryDate,
+                Scope = scope,
+                TokenType = tokenType
+            };
+
+            return token;
+        }
+
+        private static Scope[] GetScopeFromSettings()
+        {
+            string scopeString = (string)localSettings.Values[Constants.ScopeKey];
+            string[] scopeStringItems = scopeString.Split(',');
+            Scope[] scopeItems = new Scope[scopeStringItems.Length];
+
+            for (int i = 0; i < scopeStringItems.Length; i++)
+            {
+                scopeItems[i] = (Scope)int.Parse(scopeStringItems[i]);
+            }
+
+            return scopeItems;
+        }
     }
 }

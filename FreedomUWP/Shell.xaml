@@ -6,10 +6,18 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource SystemControlAcrylicWindowBrush}">
+    Background="{ThemeResource SystemControlAltMediumLowAcrylicWindowMediumBrush}">
 
     <Grid>
-        <Frame Name="ContentFrame"/>
-        <Frame Name="AuthViewFrame"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Freedom"
+                   Margin="12,8"
+                   FontWeight="SemiBold"/>
+        <Frame Name="ContentFrame" Grid.Row="1"/>
+
     </Grid>
 </Page>

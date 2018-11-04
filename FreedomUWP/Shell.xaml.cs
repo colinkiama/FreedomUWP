@@ -27,10 +27,9 @@ namespace FreedomUWP
         public Shell()
         {
             this.InitializeComponent();
-            AuthViewFrame.Visibility = Visibility.Collapsed;
             if (TokenHelper.InitiateTokenSystem() == true)
             {
-                ContentFrame.Navigate(typeof(HomeView));
+                ContentFrame.Navigate(typeof(PostView));
             }
             else
             {

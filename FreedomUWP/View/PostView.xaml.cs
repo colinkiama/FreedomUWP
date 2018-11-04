@@ -26,5 +26,21 @@ namespace FreedomUWP.View
         {
             this.InitializeComponent();
         }
+
+        private void EditTitleButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            TitleStackPanel.Visibility = Visibility.Collapsed;
+            EditTitleTextBox.Visibility = Visibility.Visible;
+        }
+
+        private void EditTitleTextBox_KeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                EditTitleTextBox.Visibility = Visibility.Collapsed;
+                TitleStackPanel.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
