@@ -25,8 +25,19 @@ namespace FreedomUWP.View
         public PostView()
         {
             this.InitializeComponent();
+            ContentRichEditBox.Loaded += ContentRichEditBox_Loaded;
         }
 
+        private void ContentRichEditBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            var reb = (RichEditBox)sender;
+            reb.Focus(FocusState.Programmatic);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+        }
         private void EditTitleButton_Click(object sender, RoutedEventArgs e)
         {
             
