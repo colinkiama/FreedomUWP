@@ -55,5 +55,13 @@ namespace FreedomUWP.View
                 TitleStackPanel.Visibility = Visibility.Visible;
             }
         }
+
+        private void ContentRichEditBox_TextChanged(object sender, RoutedEventArgs e)
+        {
+            var reb = (RichEditBox)sender;
+            string richEditBoxContent = "";
+            reb.Document.GetText(Windows.UI.Text.TextGetOptions.None, out richEditBoxContent);
+            PublishArticleButton.CommandParameter = richEditBoxContent;
+        }
     }
 }
