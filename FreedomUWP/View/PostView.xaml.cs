@@ -32,6 +32,8 @@ namespace FreedomUWP.View
             
             TitleStackPanel.Visibility = Visibility.Collapsed;
             EditTitleTextBox.Visibility = Visibility.Visible;
+            EditTitleTextBox.Focus(FocusState.Programmatic);
+            EditTitleTextBox.SelectAll();
         }
 
         private void EditTitleTextBox_KeyUp(object sender, KeyRoutedEventArgs e)
