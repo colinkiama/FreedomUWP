@@ -3,4 +3,7 @@ UWP Medium client
 
 Feel free to explore the code. 😊
 
-Readme will be updated in time.
+## Screenshots
+
+![Screenshot of app where user is creating a post](img/FreedomShot.png)
+
