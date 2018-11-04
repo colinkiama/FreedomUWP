@@ -5,6 +5,6 @@ Feel free to explore the code. 😊
 
 ## Screenshots
 
-![Screenshot of app where user is creating a post](img/Screenshot (257).png)
+![Screenshot of app where user is creating a post](img/FreedomShot.png)
 
 Readme will be updated in time.
