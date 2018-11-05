@@ -46,11 +46,49 @@
                  HorizontalAlignment="Left"
                  Visibility="Collapsed"
                  Text="{x:Bind ViewModel.Title, Mode=TwoWay}"/>
-        <PersonPicture HorizontalAlignment="Right"
-                       Margin="0,28,40,0"
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,28,40,0">
+            <PersonPicture 
+                       
                        ProfilePicture="{x:Bind ViewModel.CurrentUser.ImageUrl}"
                        Width="50"
                        Height="50"/>
+
+
+
+            <Button Name="AccountSettingsDropdownButton"
+                    Style="{StaticResource TextBlockButtonStyle}"
+                    Foreground="Black">
+                <Button.Content>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE011;" />
+                </Button.Content>
+                <Button.Flyout>
+                    <Flyout>
+                        <Flyout.FlyoutPresenterStyle>
+                            <Style TargetType="FlyoutPresenter">
+                                <Setter Property="Background"
+                    Value="{ThemeResource SystemControlAltMediumLowAcrylicElementMediumBrush}"/>
+                            </Style>
+                        </Flyout.FlyoutPresenterStyle>
+                        <Flyout.Content>
+                            <StackPanel>
+                                <TextBlock Text="{x:Bind ViewModel.CurrentUser.Name, FallbackValue={x:Null}}"
+                                           FontWeight="SemiBold"
+                                           Margin="0,0,0,12"/>
+                                <MenuFlyoutSeparator/>
+                                <MenuFlyoutItem Name="SignOutFlyoutItem"
+                                    Click="SignOutFlyoutItem_Click"
+                                                Command="{x:Bind ViewModel.LogOutCommand}">
+                                    Sign Out
+                                </MenuFlyoutItem>
+                            </StackPanel>
+                        </Flyout.Content>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+        </StackPanel>
 
         <controls:DropShadowPanel HorizontalContentAlignment="Stretch"
                                   VerticalContentAlignment="Stretch"
@@ -68,20 +106,36 @@
                          TextChanged="ContentRichEditBox_TextChanged"/>
         </controls:DropShadowPanel>
 
-        <Button Grid.Row="1" Style="{StaticResource TextBlockButtonStyle}"
+
+        <StackPanel VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                    Grid.Row="1">
+            <Button Style="{StaticResource TextBlockButtonStyle}"
                 Background="Transparent"
                 Foreground="Black"
                 ToolTipService.ToolTip="Publish"
-                VerticalAlignment="Bottom"
-                HorizontalAlignment="Right"
-                Name="PublishArticleButton"
-                Command="{x:Bind ViewModel.PostCommand}">
-            <Button.Content>
-                <FontIcon FontSize="24" 
+                Name="PublishArticleButton">
+                <Button.Flyout>
+                    <Flyout>
+                        <StackPanel>
+                            <TextBlock Text="Publish Article As:"
+                                       FontWeight="SemiBold"
+                                       HorizontalAlignment="Left"
+                                       Margin="0,0,0,8"/>
+                            <!--<MenuFlyoutSeparator/>-->
+                            <MenuFlyoutItem Name="PublicArticleFlyoutItem" Command="{x:Bind ViewModel.PostPublicCommand}">Public</MenuFlyoutItem>
+                            <MenuFlyoutItem Name="UnlistedArticleFlyoutItem" Command="{x:Bind ViewModel.PostUnlistedCommand}">Unlisted</MenuFlyoutItem>
+                            <MenuFlyoutItem Name="DraftFlyoutItem" Command="{x:Bind ViewModel.PostDraftCommand}">Draft</MenuFlyoutItem>
+                        </StackPanel>
+                    </Flyout>
+                </Button.Flyout>
+                <Button.Content>
+                    <FontIcon FontSize="24" 
                     FontFamily="Segoe MDL2 Assets"
                           Glyph="&#xE122;" 
                           Margin="0,0,8,8"/>
-            </Button.Content>
-        </Button>
+                </Button.Content>
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>
