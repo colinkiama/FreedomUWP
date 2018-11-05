@@ -1,5 +1,5 @@
 # FreedomUWP
-UWP Medium client
+UWP Medium client. Currently the app can publish new articles directly to Medium.
 
 Feel free to explore the code. 😊
 
