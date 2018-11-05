@@ -40,12 +40,19 @@ namespace FreedomUWP.ViewModel
         }
 
         public RelayCommand<string> PostCommand;
+        public RelayCommand LogOutCommand;
 
         public PostViewModel()
         {
             CurrentUser = App.mediumClient.GetCurrentUser(TokenHelper.GetToken());
             Title = "New Post";
             PostCommand = new RelayCommand<string>(PostArticle);
+            LogOutCommand = new RelayCommand(LogOut);
+        }
+
+        private void LogOut()
+        {
+            TokenHelper.ClearTokenSettings();
         }
 
         private void PostArticle(string articleContent)

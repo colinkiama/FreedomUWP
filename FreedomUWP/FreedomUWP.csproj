@@ -108,9 +108,6 @@
     </Compile>
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\PostViewModel.cs" />
-    <Compile Include="View\CreatePostView.xaml.cs">
-      <DependentUpon>CreatePostView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
@@ -159,10 +156,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Shell.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\CreatePostView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
