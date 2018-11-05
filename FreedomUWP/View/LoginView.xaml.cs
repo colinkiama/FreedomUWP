@@ -33,7 +33,7 @@ namespace FreedomUWP.View
             bool authenticationResult = await OAuth.Authenticate();
             if (authenticationResult == true)
             {
-                Frame.Navigate(typeof(HomeView));
+                Frame.Navigate(typeof(PostView));
             }
         }
     }

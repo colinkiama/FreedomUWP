@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -61,7 +62,14 @@ namespace FreedomUWP.View
             var reb = (RichEditBox)sender;
             string richEditBoxContent = "";
             reb.Document.GetText(Windows.UI.Text.TextGetOptions.None, out richEditBoxContent);
-            PublishArticleButton.CommandParameter = richEditBoxContent;
+            PublicArticleFlyoutItem.CommandParameter = richEditBoxContent;
+            DraftFlyoutItem.CommandParameter = richEditBoxContent;
+            UnlistedArticleFlyoutItem.CommandParameter = richEditBoxContent;
+        }
+
+        private void SignOutFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(LoginView));
         }
     }
 }

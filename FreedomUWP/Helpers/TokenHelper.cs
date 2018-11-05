@@ -127,5 +127,14 @@ namespace FreedomUWP.Helpers
 
             return scopeItems;
         }
+
+        public static void ClearTokenSettings()
+        {
+            localSettings.Values[Constants.TokenTypeKey] = null;
+            localSettings.Values[Constants.ScopeKey] = null;
+            localSettings.Values[Constants.refreshTokenKey] = null;
+            localSettings.Values[Constants.accessTokenKey] = null;
+            localSettings.Values[Constants.refreshDateKey] = null;
+        }
     }
 }
