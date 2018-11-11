@@ -71,30 +71,37 @@ namespace FreedomUWP.ViewModel
 
         private async void PostPublicArticle(string articleContent)
         {
-            Post publishedPost = App.mediumClient.CreatePost(CurrentUser.Id,
-                 new CreatePostRequestBody()
-                 {
-                     Title = Title,
-                     Content = articleContent,
-                     ContentFormat = ContentFormat.Html,
-                     PublishStatus = PublishStatus.Public,
-                 },
-                 TokenHelper.GetToken());
+            Post publishedPost = await Task.Run(() =>
+            {
+                return App.mediumClient.CreatePost(CurrentUser.Id,
+new CreatePostRequestBody()
+{
+    Title = Title,
+    Content = articleContent,
+    ContentFormat = ContentFormat.Html,
+    PublishStatus = PublishStatus.Public,
+},
+TokenHelper.GetToken());
+            });
 
-           await ShowPublishedArticlePopup(publishedPost.Url);
+            await ShowPublishedArticlePopup(publishedPost.Url);
         }
 
         private async void PostDraft(string draftContent)
         {
-            Post publishedPost = App.mediumClient.CreatePost(CurrentUser.Id,
-                new CreatePostRequestBody()
-                {
-                    Title = Title,
-                    Content = draftContent,
-                    ContentFormat = ContentFormat.Html,
-                    PublishStatus = PublishStatus.Draft,
-                },
-                TokenHelper.GetToken());
+            Post publishedPost = await Task.Run(() =>
+            {
+                return App.mediumClient.CreatePost(CurrentUser.Id,
+ new CreatePostRequestBody()
+ {
+     Title = Title,
+     Content = draftContent,
+     ContentFormat = ContentFormat.Html,
+     PublishStatus = PublishStatus.Draft,
+ },
+ TokenHelper.GetToken());
+            });
+
 
             await ShowPublishedArticlePopup(publishedPost.Url);
         }
@@ -102,15 +109,18 @@ namespace FreedomUWP.ViewModel
 
         private async void PostUnlistedArticle(string articleContent)
         {
-            Post publishedPost = App.mediumClient.CreatePost(CurrentUser.Id,
-                 new CreatePostRequestBody()
-                 {
-                     Title = Title,
-                     Content = articleContent,
-                     ContentFormat = ContentFormat.Html,
-                     PublishStatus = PublishStatus.Unlisted,
-                 },
-                 TokenHelper.GetToken());
+            Post publishedPost = await Task.Run(() =>
+            {
+                return App.mediumClient.CreatePost(CurrentUser.Id,
+ new CreatePostRequestBody()
+ {
+     Title = Title,
+     Content = articleContent,
+     ContentFormat = ContentFormat.Html,
+     PublishStatus = PublishStatus.Unlisted,
+ },
+ TokenHelper.GetToken());
+            });
 
             await ShowPublishedArticlePopup(publishedPost.Url);
         }
