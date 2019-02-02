@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\RelayCommandWithParams.cs" />
+    <Compile Include="Core\AppConstants.cs" />
     <Compile Include="Core\Constants.cs" />
     <Compile Include="Core\OAuth.cs" />
     <Compile Include="Helpers\TokenHelper.cs" />

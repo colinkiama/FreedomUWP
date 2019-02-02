@@ -21,16 +21,16 @@ namespace FreedomUWP.Helpers
             // A null refresh date means that tokens were never generated
             // in the first place. (App never authenticated).
 
-            if (localSettings.Values[Constants.refreshDateKey] != null)
+            if (localSettings.Values[AppConstants.refreshDateKey] != null)
             {
                 tokensExist = true;
 
-                string refreshToken = (string)localSettings.Values[Constants.refreshTokenKey];
+                string refreshToken = (string)localSettings.Values[AppConstants.refreshTokenKey];
 
                 // Keep everything to one Time zone (UTC) to make it
                 // easy to deal with time.
 
-                DateTimeOffset refreshDate = (DateTimeOffset)localSettings.Values[Constants.refreshDateKey];
+                DateTimeOffset refreshDate = (DateTimeOffset)localSettings.Values[AppConstants.refreshDateKey];
                 if (DateTimeOffset.UtcNow > refreshDate)
                 {
                     RefreshAccessToken(refreshToken);
@@ -56,13 +56,13 @@ namespace FreedomUWP.Helpers
 
         public static void SaveTokenData(Token accessTokenData)
         {
-            localSettings.Values[Constants.accessTokenKey] = accessTokenData.AccessToken;
-            localSettings.Values[Constants.refreshTokenKey] = accessTokenData.RefreshToken;
+            localSettings.Values[AppConstants.accessTokenKey] = accessTokenData.AccessToken;
+            localSettings.Values[AppConstants.refreshTokenKey] = accessTokenData.RefreshToken;
 
-            localSettings.Values[Constants.refreshDateKey] = new DateTimeOffset(accessTokenData.ExpiresAt);
-            localSettings.Values[Constants.TokenTypeKey] = accessTokenData.TokenType;
+            localSettings.Values[AppConstants.refreshDateKey] = new DateTimeOffset(accessTokenData.ExpiresAt);
+            localSettings.Values[AppConstants.TokenTypeKey] = accessTokenData.TokenType;
 
-            localSettings.Values[Constants.ScopeKey] = CreateScopeString(accessTokenData.Scope);
+            localSettings.Values[AppConstants.ScopeKey] = CreateScopeString(accessTokenData.Scope);
 
         }
 
@@ -85,21 +85,21 @@ namespace FreedomUWP.Helpers
 
         private static void SaveExpiryDate(DateTimeOffset expiryDate)
         {
-            localSettings.Values[Constants.refreshDateKey] = expiryDate;
+            localSettings.Values[AppConstants.refreshDateKey] = expiryDate;
         }
 
         private static void SaveTokens(Token refreshedAccessToken)
         {
-            localSettings.Values[Constants.accessTokenKey] = refreshedAccessToken.AccessToken;
-            localSettings.Values[Constants.refreshTokenKey] = refreshedAccessToken.RefreshToken;
+            localSettings.Values[AppConstants.accessTokenKey] = refreshedAccessToken.AccessToken;
+            localSettings.Values[AppConstants.refreshTokenKey] = refreshedAccessToken.RefreshToken;
         }
 
         public static Token GetToken()
         {
-            string accessToken = (string)localSettings.Values[Constants.accessTokenKey];
-            string refreshToken = (string)localSettings.Values[Constants.refreshTokenKey];
-            DateTime expiryDate = ((DateTimeOffset)localSettings.Values[Constants.refreshDateKey]).DateTime;
-            string tokenType = (string)localSettings.Values[Constants.TokenTypeKey];
+            string accessToken = (string)localSettings.Values[AppConstants.accessTokenKey];
+            string refreshToken = (string)localSettings.Values[AppConstants.refreshTokenKey];
+            DateTime expiryDate = ((DateTimeOffset)localSettings.Values[AppConstants.refreshDateKey]).DateTime;
+            string tokenType = (string)localSettings.Values[AppConstants.TokenTypeKey];
             Scope[] scope = GetScopeFromSettings();
 
             Token token = new Token()
@@ -116,7 +116,7 @@ namespace FreedomUWP.Helpers
 
         private static Scope[] GetScopeFromSettings()
         {
-            string scopeString = (string)localSettings.Values[Constants.ScopeKey];
+            string scopeString = (string)localSettings.Values[AppConstants.ScopeKey];
             string[] scopeStringItems = scopeString.Split(',');
             Scope[] scopeItems = new Scope[scopeStringItems.Length];
 
@@ -130,11 +130,11 @@ namespace FreedomUWP.Helpers
 
         public static void ClearTokenSettings()
         {
-            localSettings.Values[Constants.TokenTypeKey] = null;
-            localSettings.Values[Constants.ScopeKey] = null;
-            localSettings.Values[Constants.refreshTokenKey] = null;
-            localSettings.Values[Constants.accessTokenKey] = null;
-            localSettings.Values[Constants.refreshDateKey] = null;
+            localSettings.Values[AppConstants.TokenTypeKey] = null;
+            localSettings.Values[AppConstants.ScopeKey] = null;
+            localSettings.Values[AppConstants.refreshTokenKey] = null;
+            localSettings.Values[AppConstants.accessTokenKey] = null;
+            localSettings.Values[AppConstants.refreshDateKey] = null;
         }
     }
 }
